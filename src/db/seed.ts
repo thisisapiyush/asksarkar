@@ -1,4 +1,4 @@
-import { db, client } from "./index";
+import { getDb, getClient } from "./index";
 import { volumes, chunks } from "./schema";
 import { sql } from "drizzle-orm";
 import { embedDocuments } from "../lib/embed";
@@ -212,8 +212,8 @@ Common reasons applications are rejected: the bank account is a joint account; t
 
 async function seed() {
   console.log("Ensuring extensions...");
-  await db.execute(sql`CREATE EXTENSION IF NOT EXISTS vector`);
-  await db.execute(sql`CREATE EXTENSION IF NOT EXISTS pg_trgm`);
+  await getDb().execute(sql`CREATE EXTENSION IF NOT EXISTS vector`);
+  await getDb().execute(sql`CREATE EXTENSION IF NOT EXISTS pg_trgm`);
 
   console.log("Loading embedding model...");
   const testEmbed = await embedDocuments(["startup check"]);
@@ -223,7 +223,7 @@ async function seed() {
   console.log(`  Model loaded (dim ${testEmbed[0].length})`);
 
   console.log("Truncating seed tables...");
-  await db.execute(sql`TRUNCATE chunks, volumes CASCADE`);
+  await getDb().execute(sql`TRUNCATE chunks, volumes CASCADE`);
 
   console.log("Inserting volumes...");
   const embeddingTexts = SEED_VOLUMES.map(
@@ -233,7 +233,7 @@ async function seed() {
 
   for (let i = 0; i < SEED_VOLUMES.length; i++) {
     const v = SEED_VOLUMES[i];
-    const [vol] = await db
+    const [vol] = await getDb()
       .insert(volumes)
       .values({
         titleEn: v.titleEn,
@@ -244,7 +244,7 @@ async function seed() {
       })
       .returning();
 
-    await db.insert(chunks).values({
+    await getDb().insert(chunks).values({
       volumeId: vol.id,
       heading: v.titleEn,
       content: v.body,
@@ -258,29 +258,29 @@ async function seed() {
 
   console.log("Creating search indexes...");
 
-  await db.execute(sql`
+  await getDb().execute(sql`
     CREATE INDEX IF NOT EXISTS chunks_embedding_idx
     ON chunks USING hnsw (embedding vector_cosine_ops)
   `);
-  await db.execute(sql`
+  await getDb().execute(sql`
     CREATE INDEX IF NOT EXISTS chunks_fts_idx
     ON chunks USING gin (to_tsvector('english', content))
   `);
-  await db.execute(sql`
+  await getDb().execute(sql`
     CREATE INDEX IF NOT EXISTS chunks_keywords_trgm_idx
     ON chunks USING gin (keywords_multiscript gin_trgm_ops)
   `);
 
   console.log("Verifying setup...");
 
-  const [{ count: volCount }] = (await db.execute(
+  const [{ count: volCount }] = (await getDb().execute(
     sql`SELECT count(*)::int as count FROM volumes`
   )) as unknown as [{ count: number }];
-  const [{ count: chunkCount }] = (await db.execute(
+  const [{ count: chunkCount }] = (await getDb().execute(
     sql`SELECT count(*)::int as count FROM chunks`
   )) as unknown as [{ count: number }];
 
-  const idxRows = (await db.execute(sql`
+  const idxRows = (await getDb().execute(sql`
     SELECT indexname, indexdef
     FROM pg_indexes
     WHERE tablename = 'chunks'
@@ -294,7 +294,7 @@ async function seed() {
   }
 
   console.log("\nDone.");
-  await client.end();
+  await getClient().end();
   process.exit(0);
 }
 

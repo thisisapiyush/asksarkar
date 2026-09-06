@@ -1,16 +1,16 @@
-import { db, client } from "./index";
+import { getDb, getClient } from "./index";
 import { chunks } from "./schema";
 import { sql } from "drizzle-orm";
 import { embedDocuments } from "../lib/embed";
 
 async function reembed() {
-  const allChunks = await db
+  const allChunks = await getDb()
     .select({ id: chunks.id, heading: chunks.heading, content: chunks.content })
     .from(chunks);
 
   if (allChunks.length === 0) {
     console.log("No chunks to re-embed.");
-    await client.end();
+    await getClient().end();
     return;
   }
 
@@ -25,7 +25,7 @@ async function reembed() {
     const embeddings = await embedDocuments(texts);
 
     for (let j = 0; j < batch.length; j++) {
-      await db.execute(
+      await getDb().execute(
         sql`UPDATE chunks SET embedding = ${`[${embeddings[j].join(",")}]`}::vector WHERE id = ${batch[j].id}`
       );
     }
@@ -34,7 +34,7 @@ async function reembed() {
   }
 
   console.log("Done.");
-  await client.end();
+  await getClient().end();
   process.exit(0);
 }
 

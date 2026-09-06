@@ -1,19 +1,30 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { drizzle, type PostgresJsDatabase } from "drizzle-orm/postgres-js";
+import postgres, { type Sql } from "postgres";
 import * as schema from "./schema";
 
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) {
-  throw new Error(
-    "DATABASE_URL is not set. Pass it via .env.local or environment variables."
-  );
+let _client: Sql | null = null;
+let _db: PostgresJsDatabase<typeof schema> | null = null;
+
+export function getClient(): Sql {
+  if (!_client) {
+    const url = process.env.DATABASE_URL;
+    if (!url) {
+      throw new Error(
+        "DATABASE_URL is not set. Pass it via .env.local or environment variables."
+      );
+    }
+    _client = postgres(url, {
+      max: 10,
+      idle_timeout: 20,
+      connect_timeout: 10,
+    });
+  }
+  return _client;
 }
 
-const client = postgres(connectionString, {
-  max: 10,
-  idle_timeout: 20,
-  connect_timeout: 10,
-});
-
-export const db = drizzle(client, { schema });
-export { client };
+export function getDb(): PostgresJsDatabase<typeof schema> {
+  if (!_db) {
+    _db = drizzle(getClient(), { schema });
+  }
+  return _db;
+}
