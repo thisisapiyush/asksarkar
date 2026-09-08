@@ -56,6 +56,7 @@ export const chunks = pgTable(
     keywordsMultiscript: text("keywords_multiscript").notNull(),
     embedding: vector768("embedding"),
     tokenCount: integer("token_count"),
+    contentHash: text("content_hash"),
   },
   (table) => [index("chunks_volume_idx").on(table.volumeId)]
 );

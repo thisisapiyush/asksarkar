@@ -36,6 +36,11 @@ async function run() {
   );
   console.log("indexes ready");
 
+  await db.execute(
+    sql`ALTER TABLE chunks ADD COLUMN IF NOT EXISTS content_hash TEXT`
+  );
+  console.log("content_hash column ready");
+
   await getClient().end();
 }
 

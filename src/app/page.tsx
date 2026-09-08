@@ -68,7 +68,7 @@ const UI: Record<Lang, Record<string, string>> = {
   },
 };
 
-const STARTERS: Record<Lang, string>[] = [
+const DEFAULT_STARTERS: Record<Lang, string>[] = [
   {
     en: "What do I need for a citizenship certificate?",
     ne: "नागरिकता प्रमाणपत्रका लागि के के चाहिन्छ?",
@@ -137,10 +137,30 @@ export default function Home() {
       ? crypto.randomUUID()
       : Math.random().toString(36).slice(2)
   );
+  const [starters, setStarters] = useState(DEFAULT_STARTERS);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const t = UI[lang];
+
+  useEffect(() => {
+    fetch("/api/starters")
+      .then((r) => r.json())
+      .then((q: Record<Lang, string>[]) => {
+        if (q.length) {
+          const seen = new Set<string>();
+          const merged: Record<Lang, string>[] = [];
+          for (const item of [...q, ...DEFAULT_STARTERS]) {
+            if (!seen.has(item.en) && merged.length < 4) {
+              seen.add(item.en);
+              merged.push(item);
+            }
+          }
+          setStarters(merged);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -364,7 +384,7 @@ export default function Home() {
                 {t.starters}
               </div>
               <div className="flex flex-col gap-2">
-                {STARTERS.map((s, i) => (
+                {starters.map((s, i) => (
                   <button
                     key={i}
                     onClick={() => ask(s[lang])}
