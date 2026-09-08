@@ -21,7 +21,7 @@ const UI: Record<Lang, Record<string, string>> = {
   en: {
     tagline: "What papers do I need? Ask before you travel.",
     admin: "Admin",
-    welcome: "The desk is open.",
+    welcome: "The help desk is open.",
     welcomeSub:
       "Ask in Nepali or English. You’ll get the document list, the office, the fee and the waiting time — in whichever language you picked above.",
     starters: "Common questions",
@@ -37,7 +37,7 @@ const UI: Record<Lang, Record<string, string>> = {
   ne: {
     tagline: "कुन कागजात चाहिन्छ? जानु अघि सोध्नुहोस्।",
     admin: "प्रशासन",
-    welcome: "काउन्टर खुल्लो छ।",
+    welcome: "सहायता कक्ष खुल्ला छ।",
     welcomeSub:
       "नेपाली वा अंग्रेजीमा सोध्नुहोस्। कागजातको सूची, कार्यालय, शुल्क र समय — तपाईंले छान्नुभएको भाषामा।",
     starters: "सामान्य प्रश्नहरू",
@@ -53,7 +53,7 @@ const UI: Record<Lang, Record<string, string>> = {
   rom: {
     tagline: "Kun kagajat chahincha? Janu aghi sodhnuhos.",
     admin: "Admin",
-    welcome: "Counter khulla chha.",
+    welcome: "Help desk khulla chha.",
     welcomeSub:
       "Nepali ya English ma sodhnuhos. Kagajat ko suchi, karyalaya, shulka ra samaya — tapai le chhannubhaeko bhasha ma.",
     starters: "Samanya prashnaharu",
