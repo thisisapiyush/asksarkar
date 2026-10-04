@@ -1,10 +1,14 @@
 # Ask Sarkar
 
+**Sarkar** (सरकार) means **government** in Nepali. *Ask Sarkar* = Ask the Government.
+
 Live MVP: https://asksarkar.up.railway.app/
 
 What papers do I need? Ask before you travel to a government office.
 
 A multilingual RAG helpdesk that answers Nepali citizens' questions about government services — documents to bring, which office, what fee, how long it takes — in English, Nepali (Devanagari), or Nepali (Roman script).
+
+> **Update — 5 Oct 2026:** On 29 Sep 2026, the White House launched [America.gov](https://america.gov), an AI chatbot that consolidates ~29,000 U.S. government websites into a single conversational interface. Ask Sarkar was built independently before that announcement, solving the same problem for Nepal — proving the pattern is universal: citizens everywhere need a plain-language front desk for government paperwork.
 
 > **Demo data.** All procedure content is placeholder. Not real government procedure — replace before any public use.
 
@@ -32,6 +36,15 @@ A multilingual RAG helpdesk that answers Nepali citizens' questions about govern
 | English | "You need your birth certificate and your father's citizenship copy." |
 | नेपाली | "तपाईंलाई जन्म दर्ता प्रमाणपत्र र बुबाको नागरिकताको प्रतिलिपि चाहिन्छ।" |
 | Nepali (Roman) | "Tapailai janma darta pramanpatra ra buba ko nagarikta ko pratilipi chahincha." |
+
+## Admin panel
+
+Behind HTTP Basic Auth at `/admin`:
+
+- **Upload** — paste text directly or upload PDF/DOCX/TXT to add new knowledge volumes
+- **Background ingestion** — pipeline extracts text, chunks by document structure (never splits a list), generates titles and sample questions via Haiku, produces multi-script keywords, and embeds with E5
+- **Volume management** — list all volumes, archive (excludes from retrieval) or restore
+- **Dynamic starters** — sample questions from uploaded volumes surface automatically on the public chat
 
 ## Development
 
