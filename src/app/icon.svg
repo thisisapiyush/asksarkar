@@ -1,19 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 52">
-  <polygon points="5,0 5,32 20,24 20,52 38,38 38,0 20,14" fill="#003893"/>
-  <polygon points="7,2 7,30.5 20,23.5 20,49.5 36,37 36,2 20,13" fill="#DC143C"/>
-  <circle cx="18" cy="8.5" r="3.5" fill="white"/>
-  <circle cx="19.2" cy="7.8" r="2.8" fill="#DC143C"/>
-  <circle cx="17" cy="28" r="2.2" fill="white"/>
-  <line x1="19.5" y1="28" x2="21.2" y2="28" stroke="white" stroke-width="0.9"/>
-  <line x1="14.5" y1="28" x2="12.8" y2="28" stroke="white" stroke-width="0.9"/>
-  <line x1="17" y1="25.5" x2="17" y2="23.8" stroke="white" stroke-width="0.9"/>
-  <line x1="17" y1="30.5" x2="17" y2="32.2" stroke="white" stroke-width="0.9"/>
-  <line x1="18.77" y1="26.23" x2="19.97" y2="25.03" stroke="white" stroke-width="0.9"/>
-  <line x1="15.23" y1="29.77" x2="14.03" y2="30.97" stroke="white" stroke-width="0.9"/>
-  <line x1="18.77" y1="29.77" x2="19.97" y2="30.97" stroke="white" stroke-width="0.9"/>
-  <line x1="15.23" y1="26.23" x2="14.03" y2="25.03" stroke="white" stroke-width="0.9"/>
-  <line x1="19.17" y1="27.0" x2="20.64" y2="26.07" stroke="white" stroke-width="0.9"/>
-  <line x1="14.83" y1="29.0" x2="13.36" y2="29.93" stroke="white" stroke-width="0.9"/>
-  <line x1="18.0" y1="25.83" x2="18.93" y2="24.36" stroke="white" stroke-width="0.9"/>
-  <line x1="16.0" y1="30.17" x2="15.07" y2="31.64" stroke="white" stroke-width="0.9"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-17.582 -4.664 71.571 87.246">
+<use xlink:href="#a" stroke="#003893" stroke-width="5.165"/><path id="a" d="M -15,37.5735931288 h 60 L -15,0 v 80 h 60 L -15,20 z" fill="#DC143C"/><g fill="#fff"><path d="M -11.9502769431,23.4834957055 A 12.8400974233,12.8400974233 0 0,0 11.9502769431,23.4834957055 A 11.9502769431 11.9502769431 0 0,1 -11.9502769431,23.4834957055"/><g transform="translate(0 29.045) scale(5.56106)"><circle r="1"/><g id="d"><g id="c"><path id="b" d="M 0.195090322016,-0.980785280403 L 0,-1.388784109750 L -0.195090322016,-0.980785280403" transform="rotate(11.25)"/><use xlink:href="#b" transform="rotate(22.5)"/><use xlink:href="#b" transform="rotate(45)"/></g><use xlink:href="#c" transform="rotate(67.5)"/></g><use xlink:href="#d" transform="scale(-1 1)"/></g><g transform="matrix(8.1434 0 0 8.1434 0 58.787)"><circle r="1"/><g id="g"><g id="f"><path id="e" d="M 0.258819045103,0.965925826289 L 0,1.576749285537 L -0.258819045103,0.965925826289"/><use xlink:href="#e" transform="rotate(180)"/></g><use xlink:href="#f" transform="rotate(90)"/></g><use xlink:href="#g" transform="rotate(30)"/><use xlink:href="#g" transform="rotate(60)"/></g></g>
 </svg>

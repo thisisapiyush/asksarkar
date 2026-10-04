@@ -1,45 +1,53 @@
 export function Seal({ size = 34 }: { size?: number }) {
+  const h = size;
+  const w = size * (71.571 / 87.246);
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 40 52"
+      width={w}
+      height={h}
+      viewBox="-17.582 -4.664 71.571 87.246"
       aria-hidden="true"
       style={{ display: "inline-block", verticalAlign: "middle" }}
     >
-      {/* Nepal's double-pennant flag */}
-      {/* Blue border */}
-      <polygon
-        points="5,0 5,32 20,24 20,52 38,38 38,0 20,14"
-        fill="#003893"
-      />
-      {/* Crimson fill */}
-      <polygon
-        points="7,2 7,30.5 20,23.5 20,49.5 36,37 36,2 20,13"
+      <path
+        d="M -15,37.5735931288 h 60 L -15,0 v 80 h 60 L -15,20 z"
         fill="#DC143C"
+        stroke="#003893"
+        strokeWidth="5.165"
       />
-      {/* Moon — crescent at top pennant */}
-      <circle cx="18" cy="8.5" r="3.5" fill="white" />
-      <circle cx="19.2" cy="7.8" r="2.8" fill="#DC143C" />
-      {/* Sun — 12-point star at bottom pennant */}
-      <g transform="translate(17, 28)">
-        <circle cx="0" cy="0" r="2.2" fill="white" />
-        {[...Array(12)].map((_, i) => {
-          const angle = (i * 30 * Math.PI) / 180;
-          const x2 = Math.cos(angle) * 4.2;
-          const y2 = Math.sin(angle) * 4.2;
-          return (
-            <line
-              key={i}
-              x1={Math.cos(angle) * 2.5}
-              y1={Math.sin(angle) * 2.5}
-              x2={x2}
-              y2={y2}
-              stroke="white"
-              strokeWidth="0.9"
-            />
-          );
-        })}
+      <g fill="#fff">
+        <path d="M -11.9502769431,23.4834957055 A 12.8400974233,12.8400974233 0 0,0 11.9502769431,23.4834957055 A 11.9502769431 11.9502769431 0 0,1 -11.9502769431,23.4834957055" />
+        <g transform="translate(0 29.045) scale(5.56106)">
+          <circle r="1" />
+          <g id="seal-d">
+            <g id="seal-c">
+              <path
+                id="seal-b"
+                d="M 0.195090322016,-0.980785280403 L 0,-1.388784109750 L -0.195090322016,-0.980785280403"
+                transform="rotate(11.25)"
+              />
+              <use xlinkHref="#seal-b" transform="rotate(22.5)" />
+              <use xlinkHref="#seal-b" transform="rotate(45)" />
+            </g>
+            <use xlinkHref="#seal-c" transform="rotate(67.5)" />
+          </g>
+          <use xlinkHref="#seal-d" transform="scale(-1 1)" />
+        </g>
+        <g transform="matrix(8.1434 0 0 8.1434 0 58.787)">
+          <circle r="1" />
+          <g id="seal-g">
+            <g id="seal-f">
+              <path
+                id="seal-e"
+                d="M 0.258819045103,0.965925826289 L 0,1.576749285537 L -0.258819045103,0.965925826289"
+              />
+              <use xlinkHref="#seal-e" transform="rotate(180)" />
+            </g>
+            <use xlinkHref="#seal-f" transform="rotate(90)" />
+          </g>
+          <use xlinkHref="#seal-g" transform="rotate(30)" />
+          <use xlinkHref="#seal-g" transform="rotate(60)" />
+        </g>
       </g>
     </svg>
   );
